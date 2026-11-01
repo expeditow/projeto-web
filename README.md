@@ -19,3 +19,14 @@ Ver como poderíamos generalizar, mas provavelmente vai ser: criar "categoria" d
 to vendo ainda, mas é meio chatinho e me rendi pro Claude
 
 O volume é uma memória que adicionamos pro container, como ele é efêmero ele perderia se nós derrubássemos. Portanto, quando derrubar o docker, usa o docker compose down -v, para limpar os volumes, assim numa próxima execução ele vem zerado
+
+comando p testar ai:
+
+# Reviews (registros com texto) com autor, vídeo e nota
+docker exec postgres-dev psql -U dev -d teste -c "SELECT u.nome, v.titulo, r.nota, r.texto FROM registro r JOIN usuarios u ON u.id = r.usuario_id JOIN video v ON v.id = r.video_id WHERE r.texto IS NOT NULL"
+
+# Vídeos de uma lista, na ordem
+docker exec postgres-dev psql -U dev -d teste -c "SELECT l.titulo AS lista, lv.ordem, v.titulo FROM listas l JOIN lista_video lv ON lv.lista_id = l.id JOIN video v ON v.id = lv.video_id ORDER BY l.titulo, lv.ordem"
+
+# Quantidade de curtidas e comentários por review
+docker exec postgres-dev psql -U dev -d teste -c "SELECT r.id, (SELECT count(*) FROM curtida_registro c WHERE c.registro_id = r.id) curtidas, (SELECT count(*) FROM comentarios m WHERE m.registro_id = r.id) comentarios FROM registro r WHERE r.texto IS NOT NULL"

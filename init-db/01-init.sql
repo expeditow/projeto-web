@@ -24,7 +24,7 @@ CREATE TABLE seguidores (
 -- VÍDEO  (Publica: 1 usuário -> N vídeos)
 -- =========================================================
 CREATE TABLE video (
-    id                UUID PRIMARY KEY DEFAULT,
+    id                UUID PRIMARY KEY,
     usuario_id        UUID NOT NULL REFERENCES usuarios(id),
     youtube_id        VARCHAR(11) NOT NULL,  -- ID do YouTube tem 11 caracteres (ex: dQw4w9WgXcQ)
     titulo            VARCHAR(100) NOT NULL, -- YouTube permite até 100
