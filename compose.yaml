@@ -1,0 +1,28 @@
+services:
+  db:
+    # Imagem do container
+    image: postgres:18
+    # Nome do container
+    container_name: postgres-dev
+    # Podemos adicinar user e o DB
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: meu_banco
+    # Porta
+    ports:
+      - "5432:5432"
+    # Testando para ver se o banco subiu - vi em um documentação do prisma e achei interessante
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
+    # Voluma serve para darmos a persistência ao conteiner
+    volumes: 
+      - ./init-db:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql
+
+# Não entendi pq fica separado
+volumes:
+  postgres_data:
