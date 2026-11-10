@@ -1,0 +1,55 @@
+@layouts.app({ title: 'Admin · Usuários' })
+  @page()
+    <nav aria-label="Admin">
+      @link({ route: 'admin.videos.index' })
+        Vídeos
+      @end
+      @link({ route: 'admin.users.index' })
+        Usuários
+      @end
+    </nav>
+    <h1>Usuários</h1>
+    @if(users.length)
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Papel</th>
+            <th>Vídeos publicados</th>
+            <th>Cadastro</th>
+          </tr>
+        </thead>
+        <tbody>
+          @each(user in users)
+            <tr data-user-row>
+              <td>{{ user.nome }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.papel }}</td>
+              <td>{{ user.$extras.videosPublicados_count }}</td>
+              <td>{{ user.createdAt.toFormat('dd/MM/yyyy HH:mm') }}</td>
+            </tr>
+          @end
+        </tbody>
+      </table>
+    @else
+      <p>Nenhum usuário cadastrado.</p>
+    @end
+
+    @if(users.hasPages)
+      <nav aria-label="Paginação">
+        @if(users.currentPage > 1)
+          @link({ href: users.getPreviousPageUrl() })
+            Anterior
+          @end
+        @end
+        <span>Página {{ users.currentPage }} de {{ users.lastPage }}</span>
+        @if(users.hasMorePages)
+          @link({ href: users.getNextPageUrl() })
+            Próxima
+          @end
+        @end
+      </nav>
+    @end
+  @end
+@end

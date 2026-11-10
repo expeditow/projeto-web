@@ -1,5 +1,13 @@
 @layouts.app({ title: 'Admin · Vídeos' })
   @page()
+    <nav aria-label="Admin">
+      @link({ route: 'admin.videos.index' })
+        Vídeos
+      @end
+      @link({ route: 'admin.users.index' })
+        Usuários
+      @end
+    </nav>
     <h1>Vídeos</h1>
     @if(videos.length)
       <table>
