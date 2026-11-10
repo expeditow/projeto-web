@@ -4,6 +4,9 @@
  */
 
 export const controllers = {
+  admin: {
+    Videos: () => import('#controllers/admin/videos_controller'),
+  },
   NewAccount: () => import('#controllers/new_account_controller'),
   Session: () => import('#controllers/session_controller'),
   Videos: () => import('#controllers/videos_controller'),

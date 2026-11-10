@@ -36,3 +36,10 @@ router
       .as('videos.show')
   })
   .use(middleware.auth())
+
+router
+  .group(() => {
+    router.get('videos', [controllers.admin.Videos, 'index']).as('admin.videos.index')
+  })
+  .prefix('admin')
+  .use([middleware.auth(), middleware.admin()])
