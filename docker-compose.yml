@@ -1,0 +1,23 @@
+# Sobe SOMENTE o Postgres. A aplicação roda na máquina (node ace serve --hmr).
+# O schema do banco NÃO vem de um .sql: quem cria as tabelas são as migrations.
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ytboxd-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ytboxd
+      POSTGRES_PASSWORD: ytboxd
+      POSTGRES_DB: ytboxd
+    ports:
+      - '5432:5432'
+    volumes:
+      - ytboxd-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ytboxd -d ytboxd']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  ytboxd-pgdata:

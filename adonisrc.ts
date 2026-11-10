@@ -64,6 +64,7 @@ export default defineConfig({
   |
   */
   preloads: [
+    () => import('#start/inflector'),
     () => import('#start/routes'),
     () => import('#start/kernel'),
     () => import('#start/validator'),

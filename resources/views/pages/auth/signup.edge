@@ -1,6 +1,6 @@
 @layouts.auth()
-  <h1 class="auth__title">Create your account</h1>
-  <p class="auth__sub">Start building with the starter kit.</p>
+  <h1 class="auth__title">Crie sua conta</h1>
+  <p class="auth__sub">Registre o que você assiste no YouTube.</p>
   @form({
     route: 'new_account.store',
     method: 'POST',
@@ -8,22 +8,22 @@
     'x-data': '{ submitting: false }',
     'x-on:submit': 'submitting = true',
   })
-    @field.root({ name: 'fullName' })
-      @!field.label({ text: 'Full name' })
-      @!input.control({ autocomplete: 'name', placeholder: 'Ada Lovelace' })
+    @field.root({ name: 'nome' })
+      @!field.label({ text: 'Nome' })
+      @!input.control({ autocomplete: 'name', placeholder: 'Seu nome' })
       @!field.error()
     @end
     @field.root({ name: 'email' })
-      @!field.label({ text: 'Email' })
+      @!field.label({ text: 'E-mail' })
       @!input.control({
         type: 'email',
         autocomplete: 'email',
-        placeholder: 'you@example.com',
+        placeholder: 'voce@exemplo.com',
       })
       @!field.error()
     @end
     @field.root({ name: 'password' })
-      @!field.label({ text: 'Password' })
+      @!field.label({ text: 'Senha' })
       @!input.control({
         type: 'password',
         autocomplete: 'new-password',
@@ -32,7 +32,7 @@
       @!field.error()
     @end
     @field.root({ name: 'passwordConfirmation' })
-      @!field.label({ text: 'Confirm password' })
+      @!field.label({ text: 'Confirme a senha' })
       @!input.control({
         type: 'password',
         autocomplete: 'new-password',
@@ -41,21 +41,20 @@
       @!field.error()
     @end
     @!button({
-      text: 'Create account',
+      text: 'Criar conta',
       type: 'submit',
       block: true,
       style: 'margin-top: 4px;',
       'x-bind:disabled': 'submitting',
-      'x-text': "submitting ? 'One moment…' : 'Create account'",
+      'x-text': "submitting ? 'Um momento…' : 'Criar conta'",
     })
   @end
 
   <p class="auth__foot">
-    
-    Already have an account?
+    Já tem uma conta?
 
     @link({ route: 'session.create', class: 'il' })
-      Sign in
+      Entrar
     @end
   </p>
 @end

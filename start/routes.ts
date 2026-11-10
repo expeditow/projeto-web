@@ -27,5 +27,21 @@ router
   .group(() => {
     router.on('/dashboard').render('pages/dashboard').as('dashboard')
     router.post('logout', [controllers.Session, 'destroy'])
+
+    router.get('videos', [controllers.Videos, 'index']).as('videos.index')
+    router.get('videos/novo', [controllers.Videos, 'create']).as('videos.create')
+    router.post('videos', [controllers.Videos, 'store']).as('videos.store')
+    router
+      .get('videos/:id', [controllers.Videos, 'show'])
+      .where('id', router.matchers.number())
+      .as('videos.show')
   })
   .use(middleware.auth())
+
+router
+  .group(() => {
+    router.get('videos', [controllers.admin.Videos, 'index']).as('admin.videos.index')
+    router.get('usuarios', [controllers.admin.Users, 'index']).as('admin.users.index')
+  })
+  .prefix('admin')
+  .use([middleware.auth(), middleware.admin()])

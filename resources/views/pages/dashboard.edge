@@ -12,6 +12,14 @@
         Start in
         <span class="kbd">resources/views/pages/dashboard.edge</span>
       </p>
+      @link({ route: 'videos.index' })
+        Vídeos
+      @end
+      @if(auth.user?.papel === 'admin')
+        @link({ route: 'admin.videos.index' })
+          Admin
+        @end
+      @end
     </div>
   @end
 @end

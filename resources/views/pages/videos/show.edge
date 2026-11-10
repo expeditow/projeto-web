@@ -1,0 +1,57 @@
+@layouts.app({ title: video.titulo })
+  @page()
+    <h1>{{ video.titulo }}</h1>
+
+    <div style="position: relative; width: 100%; aspect-ratio: 16 / 9;">
+      <iframe
+        src="https://www.youtube.com/embed/{{ video.youtubeId }}"
+        title="{{ video.titulo }}"
+        style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        loading="lazy"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    @section({ title: 'Informações' })
+      <dl>
+        <dt>Canal</dt>
+        <dd>{{ video.canal ? video.canal.nome : '—' }}</dd>
+        <dt>Publicado por</dt>
+        <dd>{{ video.publicador ? video.publicador.nome : '—' }}</dd>
+        <dt>Data de publicação</dt>
+        <dd>{{ video.createdAt ? video.createdAt.toFormat('dd/MM/yyyy') : '—' }}</dd>
+      </dl>
+      <p>
+        @link({
+          href: `https://www.youtube.com/watch?v=${video.youtubeId}`,
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        })
+          Ver no YouTube
+        @end
+      </p>
+    @end
+
+    @section({ title: 'Nota média' })
+      <p>Em breve</p>
+    @end
+
+    @section({ title: 'Reviews' })
+      <p>Em breve</p>
+    @end
+
+    @section({ title: 'Tags' })
+      @if(video.tags.length)
+        <ul>
+          @each(tag in video.tags)
+            <li>{{ tag.nome }}</li>
+          @end
+        </ul>
+      @else
+        <p>Em breve</p>
+      @end
+    @end
+  @end
+@end

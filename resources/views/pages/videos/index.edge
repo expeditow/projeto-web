@@ -1,0 +1,45 @@
+@layouts.app({ title: 'Vídeos' })
+  @page()
+    <h1>Vídeos</h1>
+    <form method="GET" action="{{ route('videos.index') }}" role="search">
+      <input type="search" name="q" value="{{ q }}" placeholder="Buscar por título" aria-label="Buscar por título" />
+      @!button({ text: 'Buscar', type: 'submit' })
+    </form>
+
+    <p>{{ videos.total }} {{ videos.total === 1 ? 'resultado' : 'resultados' }}</p>
+
+    @if(videos.length)
+      <ul>
+        @each(video in videos)
+          <li>
+            @if(video.thumbnail)
+              <img src="{{ video.thumbnail }}" alt="" width="160" loading="lazy" />
+            @end
+            @link({ route: 'videos.show', routeParams: { id: video.id } })
+              {{ video.titulo }}
+            @end
+            <span>{{ video.canal ? video.canal.nome : '—' }}</span>
+          </li>
+        @end
+      </ul>
+    @else
+      <p>Nenhum vídeo encontrado</p>
+    @end
+
+    @if(videos.hasPages)
+      <nav aria-label="Paginação">
+        @if(videos.currentPage > 1)
+          @link({ href: videos.getPreviousPageUrl() })
+            Anterior
+          @end
+        @end
+        <span>Página {{ videos.currentPage }} de {{ videos.lastPage }}</span>
+        @if(videos.hasMorePages)
+          @link({ href: videos.getNextPageUrl() })
+            Próxima
+          @end
+        @end
+      </nav>
+    @end
+  @end
+@end
