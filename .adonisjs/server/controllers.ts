@@ -5,6 +5,7 @@
 
 export const controllers = {
   admin: {
+    Users: () => import('#controllers/admin/users_controller'),
     Videos: () => import('#controllers/admin/videos_controller'),
   },
   NewAccount: () => import('#controllers/new_account_controller'),

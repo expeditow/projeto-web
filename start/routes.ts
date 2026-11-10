@@ -40,6 +40,7 @@ router
 router
   .group(() => {
     router.get('videos', [controllers.admin.Videos, 'index']).as('admin.videos.index')
+    router.get('usuarios', [controllers.admin.Users, 'index']).as('admin.users.index')
   })
   .prefix('admin')
   .use([middleware.auth(), middleware.admin()])
