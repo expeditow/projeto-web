@@ -7,19 +7,243 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class CanalSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'nome', 'updatedAt', 'youtubeId'] as const
+  $columns = CanalSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare nome: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare youtubeId: string
+}
+
+export class ComentarioSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'reviewId', 'texto', 'updatedAt', 'userId'] as const
+  $columns = ComentarioSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare reviewId: number
+  @column()
+  declare texto: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+}
+
+export class CurtidasReviewSchema extends BaseModel {
+  static $columns = ['createdAt', 'reviewId', 'userId'] as const
+  $columns = CurtidasReviewSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare reviewId: number
+  @column({ isPrimary: true })
+  declare userId: number
+}
+
+export class FavoritoSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'posicao', 'updatedAt', 'userId', 'videoId'] as const
+  $columns = FavoritoSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare posicao: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+  @column()
+  declare videoId: number
+}
+
+export class InteracaoSchema extends BaseModel {
+  static $columns = ['createdAt', 'curtiu', 'id', 'momentoSegundos', 'updatedAt', 'userId', 'videoId'] as const
+  $columns = InteracaoSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare curtiu: boolean
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare momentoSegundos: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+  @column()
+  declare videoId: number
+}
+
+export class ListaVideoSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'listaId', 'ordem', 'updatedAt', 'videoId'] as const
+  $columns = ListaVideoSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare listaId: number
+  @column()
+  declare ordem: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare videoId: number
+}
+
+export class ListaSchema extends BaseModel {
+  static $columns = ['createdAt', 'descricao', 'id', 'titulo', 'updatedAt', 'userId'] as const
+  $columns = ListaSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare descricao: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare titulo: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+}
+
+export class RegistroSchema extends BaseModel {
+  static $columns = ['createdAt', 'dataAssistido', 'id', 'nota', 'updatedAt', 'userId', 'videoId'] as const
+  $columns = RegistroSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.date()
+  declare dataAssistido: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare nota: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+  @column()
+  declare videoId: number
+}
+
+export class ReviewSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'registroId', 'texto', 'updatedAt'] as const
+  $columns = ReviewSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare registroId: number
+  @column()
+  declare texto: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class SeguidorSchema extends BaseModel {
+  static $columns = ['createdAt', 'seguidoId', 'seguidorId'] as const
+  $columns = SeguidorSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare seguidoId: number
+  @column({ isPrimary: true })
+  declare seguidorId: number
+}
+
+export class TagSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'nome', 'updatedAt'] as const
+  $columns = TagSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare nome: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'updatedAt'] as const
+  static $columns = ['bio', 'createdAt', 'email', 'foto', 'id', 'nome', 'papel', 'password', 'updatedAt'] as const
   $columns = UserSchema.$columns
+  @column()
+  declare bio: string | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
   declare email: string
   @column()
-  declare fullName: string | null
+  declare foto: string | null
   @column({ isPrimary: true })
   declare id: number
+  @column()
+  declare nome: string
+  @column()
+  declare papel: string
   @column({ serializeAs: null })
   declare password: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+}
+
+export class VideoTagSchema extends BaseModel {
+  static $columns = ['createdAt', 'tagId', 'videoId'] as const
+  $columns = VideoTagSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare tagId: number
+  @column({ isPrimary: true })
+  declare videoId: number
+}
+
+export class VideoSchema extends BaseModel {
+  static $columns = ['canalId', 'categoriaYoutube', 'createdAt', 'duracaoSegundos', 'id', 'publicadoPor', 'thumbnail', 'titulo', 'updatedAt', 'youtubeId'] as const
+  $columns = VideoSchema.$columns
+  @column()
+  declare canalId: number | null
+  @column()
+  declare categoriaYoutube: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare duracaoSegundos: number | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare publicadoPor: number | null
+  @column()
+  declare thumbnail: string | null
+  @column()
+  declare titulo: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare youtubeId: string
+}
+
+export class WatchlistSchema extends BaseModel {
+  static $columns = ['createdAt', 'userId', 'videoId'] as const
+  $columns = WatchlistSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare userId: number
+  @column()
+  declare videoId: number
 }

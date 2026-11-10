@@ -8,8 +8,8 @@
     'x-data': '{ submitting: false }',
     'x-on:submit': 'submitting = true',
   })
-    @field.root({ name: 'fullName' })
-      @!field.label({ text: 'Full name' })
+    @field.root({ name: 'nome' })
+      @!field.label({ text: 'Nome' })
       @!input.control({ autocomplete: 'name', placeholder: 'Ada Lovelace' })
       @!field.error()
     @end
