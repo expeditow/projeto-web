@@ -10,12 +10,12 @@ Tamanhos: P = 1,5 dia-pessoa · M = 4 · P/M = 2,75. Sprint = 2 semanas = 10 dia
 | T02 | 0 | Fundação | Padrão de API (erros, paginação, validação) | M |  | A fazer | Contrato compartilhado entre os dois |
 | T03 | 0 | Fundação | Layout base do front | M |  | A fazer | Roteador e layout são arquivos compartilhados |
 | T04 | 0 | Fundação | Cliente da YouTube API isolado, com cache | P |  | A fazer | Facilita mock e economiza cota |
-| T05 | 1 | Fase 1 | Cadastro e login | P | Sprint 0 | Em andamento | Entregar nos 2 primeiros dias; cria campo `papel` |
-| T06 | 1 | Fase 1 | Painel admin: Listar Usuários (BO) | P | Cadastro e login | A fazer | Fora do roadmap original; exige papel admin e paginação |
-| T07 | 1 | Fase 1 | Painel admin: Listar Vídeos (BO) | P | Enviar vídeo | A fazer | Fora do roadmap original; mostra quem publicou |
-| T08 | 1 | Fase 1 | Detalhar vídeo (player embed + metadados) | M | Enviar vídeo | A fazer | Nota média, reviews e tags entram como placeholders |
-| T09 | 1 | Fase 1 | Enviar vídeo (URL/ID + metadado via API) | M | Cliente YouTube API; Cadastro e login | A fazer | Usa usuário fixo até o login ficar pronto; seed de 5–10 vídeos no dia 1 |
-| T10 | 1 | Fase 1 | Buscar vídeos (busca local por título) | M | Enviar vídeo | A fazer | Só banco local; busca de canal fica para o Sprint 2 |
+| T05 | 1 | Fase 1 | Cadastro e login | P | Sprint 0 | Concluído | Entregar nos 2 primeiros dias; cria campo `papel` |
+| T06 | 1 | Fase 1 | Painel admin: Listar Usuários (BO) | P | Cadastro e login | Concluído | Fora do roadmap original; exige papel admin e paginação |
+| T07 | 1 | Fase 1 | Painel admin: Listar Vídeos (BO) | P | Enviar vídeo | Concluído | Fora do roadmap original; mostra quem publicou |
+| T08 | 1 | Fase 1 | Detalhar vídeo (player embed + metadados) | M | Enviar vídeo | Concluído | Nota média, reviews e tags entram como placeholders |
+| T09 | 1 | Fase 1 | Enviar vídeo (URL/ID + metadado via API) | M | Cliente YouTube API; Cadastro e login | Concluído | Usa usuário fixo até o login ficar pronto; seed de 5–10 vídeos no dia 1 |
+| T10 | 1 | Fase 1 | Buscar vídeos (busca local por título) | M | Enviar vídeo | Concluído | Só banco local; busca de canal fica para o Sprint 2 |
 | T11 | 2 | Fase 1 | Marcar como assistido | P | Detalhar vídeo | A fazer | Cria Registro com data_assistido |
 | T12 | 2 | Fase 1 | Watchlist: adicionar/remover | P | Detalhar vídeo | A fazer | Decidir antes: `status` no Registro ou tabela própria |
 | T13 | 2 | Fase 1 | Review: criar/editar/deletar | M | Marcar como assistido | A fazer | Vinculada ao Registro, com nota e texto |
