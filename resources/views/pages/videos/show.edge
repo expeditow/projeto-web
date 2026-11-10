@@ -1,0 +1,12 @@
+{{-- Provisório: a página de detalhe completa (player embed etc.) é a T08 --}}
+@layouts.app({ title: video.titulo })
+  @page()
+    <h1>{{ video.titulo }}</h1>
+    @if(video.canal)
+      <p>{{ video.canal.nome }}</p>
+    @end
+    @if(video.thumbnail)
+      <img src="{{ video.thumbnail }}" alt="{{ video.titulo }}" width="480" />
+    @end
+  @end
+@end

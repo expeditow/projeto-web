@@ -1,0 +1,24 @@
+@layouts.app({ title: 'Enviar vídeo' })
+  @page()
+    <h1>Enviar vídeo</h1>
+    <p>Cole o link ou o ID de um vídeo do YouTube.</p>
+    @form({
+      route: 'videos.store',
+      method: 'POST',
+      'x-data': '{ submitting: false }',
+      'x-on:submit': 'submitting = true',
+    })
+      @field.root({ name: 'url' })
+        @!field.label({ text: 'URL ou ID do vídeo' })
+        @!input.control({ placeholder: 'https://www.youtube.com/watch?v=...' })
+        @!field.error()
+      @end
+      @!button({
+        text: 'Enviar',
+        type: 'submit',
+        'x-bind:disabled': 'submitting',
+        'x-text': "submitting ? 'Buscando no YouTube…' : 'Enviar'",
+      })
+    @end
+  @end
+@end
