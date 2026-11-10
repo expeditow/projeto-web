@@ -6,7 +6,7 @@ Tamanhos: P = 1,5 dia-pessoa · M = 4 · P/M = 2,75. Sprint = 2 semanas = 10 dia
 
 | ID | Sprint | Fase | Feature | Tam. | Depende de | Status | Observação |
 |---|---|---|---|---|---|---|---|
-| T01 | 0 | Fundação | Repositório, stack, CI e migrations base | P |  | Em andamento | Esteira de CI: build, lint e testes a cada push |
+| T01 | 0 | Fundação | Repositório, stack, CI e migrations base | P |  | Concluído | Esteira de CI: build, lint e testes a cada push |
 | T02 | 0 | Fundação | Padrão de API (erros, paginação, validação) | M |  | A fazer | Contrato compartilhado entre os dois |
 | T03 | 0 | Fundação | Layout base do front | M |  | A fazer | Roteador e layout são arquivos compartilhados |
 | T04 | 0 | Fundação | Cliente da YouTube API isolado, com cache | P |  | A fazer | Facilita mock e economiza cota |

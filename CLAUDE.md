@@ -53,10 +53,11 @@ node ace test && npm run lint && npm run typecheck   # o CI roda o mesmo
   `ON DELETE CASCADE` nos dependentes.
 
 ## Estado atual
-Pronto: cadastro/login/logout/dashboard (sessão), 15 tabelas + models com relações, testes das
-relações (`tests/unit/modelos.spec.ts`), CI (Node 24 + Postgres: lint, typecheck, build, migrations, testes).
-**Falta tudo o que é produto**: rotas/controllers/telas de vídeos, registros, reviews, comentários,
-curtidas, seguir, favoritos, watchlist, listas, feed, ranking por tag, painel admin, player embed, busca.
+Pronto: cadastro/login/logout, 15 tabelas com models e relações, CI com Postgres, e as tasks T05 a T10
+(enviar vídeo via oEmbed, detalhar vídeo com player, listar vídeos e usuários no BO com middleware de admin,
+buscar vídeos).
+**Falta**: marcar assistido/registro, watchlist, review, perfil, seguir, feed, curtir e comentar review, listas,
+tags, ranking, favoritos e o resto do backlog (ver `docs/TASKS.md`).
 Backlog completo (T01–T33, sprints 0–8) em **`docs/TASKS.md`** — cópia da planilha `PROJETO-WEB.xlsx` do grupo, já
 conferida contra o banco. Ao concluir uma task, atualize o Status lá. Antes de implementar uma task, leia a linha dela
 e a seção "O que o banco já cobre".
@@ -66,6 +67,8 @@ e a seção "O que o banco já cobre".
 - Atribuição de tag (quem cria/atribui) e relação "Publica" 1:N: confirmar com o Gabriel.
 - Tailwind (exigido pela matéria) ainda não instalado; front: manter Edge/Alpine ou separar (React)?
 - Playlist e `posicao_segundos` ficaram de fora por enquanto.
+- A busca de vídeos não ignora acentos (exigiria a extensão `unaccent` e uma migration).
+- O canal é salvo com o `@handle` do oEmbed no campo `canais.youtube_id`.
 
 ## Ambiente do Eduardo (importante)
 O notebook dele é **da empresa e bloqueia instalações** (Docker, Postgres, scripts do PowerShell,
