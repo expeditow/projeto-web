@@ -78,10 +78,7 @@ test.group('Buscar vídeos (T10)', (group) => {
 
   test('paginação mantém o q', async ({ client, assert }) => {
     const user = await criarUsuario()
-    await criarVideos(
-      [...Array.from({ length: 21 }, (_, i) => `Gato ${i + 1}`), 'Cachorro'],
-      user
-    )
+    await criarVideos([...Array.from({ length: 21 }, (_, i) => `Gato ${i + 1}`), 'Cachorro'], user)
 
     const p1 = await client.get('/videos').qs({ q: 'gato' }).loginAs(user)
     assert.lengthOf(linhas(p1.text()), 20)

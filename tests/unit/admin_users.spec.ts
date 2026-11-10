@@ -57,8 +57,14 @@ test.group('Admin: listar usuários (T06)', (group) => {
     const resposta = await client.get('/admin/usuarios').loginAs(admin)
     resposta.assertStatus(200)
     const html = resposta.text()
-    assert.match(html, /Bruno Publicador<\/td>\s*<td>bruno@teste\.com<\/td>\s*<td>\w+<\/td>\s*<td>3<\/td>/)
-    assert.match(html, /Ana Admin<\/td>\s*<td>admin@teste\.com<\/td>\s*<td>admin<\/td>\s*<td>0<\/td>/)
+    assert.match(
+      html,
+      /Bruno Publicador<\/td>\s*<td>bruno@teste\.com<\/td>\s*<td>\w+<\/td>\s*<td>3<\/td>/
+    )
+    assert.match(
+      html,
+      /Ana Admin<\/td>\s*<td>admin@teste\.com<\/td>\s*<td>admin<\/td>\s*<td>0<\/td>/
+    )
     assert.notInclude(html, 'senha12345')
     assert.notInclude(html, outro.password)
   })
