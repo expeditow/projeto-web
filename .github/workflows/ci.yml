@@ -1,23 +1,53 @@
 name: Build
-# Gatilho do pipeline
 on:
   push:
-    branches: [main] # Nesse caso, sempre quando tivermos um push para a main vai rodar
-  pull_request: # E quando um pull-request é aberto
-
-# Definindo o que será feito
+    branches: [main]
+  pull_request:
+env:
+  NODE_ENV: test
+  TZ: UTC
+  PORT: 3333
+  HOST: localhost
+  LOG_LEVEL: info
+  APP_KEY: ci-only-app-key-ci-only-app-key-0123456789
+  APP_URL: http://localhost:3333
+  SESSION_DRIVER: memory
+  DB_HOST: 127.0.0.1
+  DB_PORT: 5432
+  DB_USER: ytboxd
+  DB_PASSWORD: ytboxd
+  DB_DATABASE: ytboxd
 jobs:
-  build: # No nosso caso será só o build, podemos adicionar mais coisas aqui futuramente, mas só estamos testando se está subindo a aplicação sem problemas. TODO: Adicionar testes unitários + teste em subir o banco
-    runs-on: ubuntu-latest # Sobre em que OS roda
-    steps: # Os passos do build, se um falhar reporta
-      - uses: actions/checkout@v4 # Isso aqui usa um código já feito por outra pessoa. Copia o nosso código para dentro de uma VM hosteada pelo próprio Github
-
-      - uses: actions/setup-node@v4 # Instala o node.js na máquina VM
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: ytboxd
+          POSTGRES_PASSWORD: ytboxd
+          POSTGRES_DB: ytboxd
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ytboxd -d ytboxd"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
-
-      - run: npm ci # Instala as dependências que estão no nosso .json package lá
-      # - name: Rótulo que aparece no github
+      - run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
       - name: Build
-        run: node ace build # Como se trata de um código feito por nós, usamos o run. Apenas sobe a aplicação
+        run: node ace build
+      - name: Migrations
+        run: node ace migration:run --force
+      - name: Testes
+        run: node ace test
