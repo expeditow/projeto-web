@@ -9,6 +9,27 @@ import type { HttpContext } from '@adonisjs/core/http'
  */
 export default class VideosController {
   /**
+   * Busca local por título (T10): ILIKE com curingas escapados, 20 por página
+   */
+  async index({ request, view }: HttpContext) {
+    const q = String(request.input('q', '')).trim()
+    const page = Number(request.input('page', 1)) || 1
+
+    const query = Video.query().preload('canal')
+    if (q) {
+      const termo = q.replace(/[\\%_]/g, (c) => `\\${c}`)
+      query.whereRaw(`titulo ILIKE ? ESCAPE '\\'`, [`%${termo}%`])
+    }
+    const videos = await query
+      .orderBy('created_at', 'desc')
+      .orderBy('id', 'desc')
+      .paginate(page, 20)
+
+    videos.baseUrl('/videos').queryString(q ? { q } : {})
+    return view.render('pages/videos/index', { videos, q })
+  }
+
+  /**
    * Tela com o campo de URL ou ID
    */
   async create({ view }: HttpContext) {

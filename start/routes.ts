@@ -28,6 +28,7 @@ router
     router.on('/dashboard').render('pages/dashboard').as('dashboard')
     router.post('logout', [controllers.Session, 'destroy'])
 
+    router.get('videos', [controllers.Videos, 'index']).as('videos.index')
     router.get('videos/novo', [controllers.Videos, 'create']).as('videos.create')
     router.post('videos', [controllers.Videos, 'store']).as('videos.store')
     router
