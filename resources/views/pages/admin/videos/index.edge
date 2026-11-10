@@ -1,0 +1,49 @@
+@layouts.app({ title: 'Admin · Vídeos' })
+  @page()
+    <h1>Vídeos</h1>
+    @if(videos.length)
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Canal</th>
+            <th>Publicado por</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          @each(video in videos)
+            <tr>
+              <td>
+                @link({ route: 'videos.show', routeParams: { id: video.id } })
+                  {{ video.titulo }}
+                @end
+              </td>
+              <td>{{ video.canal ? video.canal.nome : '—' }}</td>
+              <td>{{ video.publicador ? video.publicador.nome : '—' }}</td>
+              <td>{{ video.createdAt.toFormat('dd/MM/yyyy HH:mm') }}</td>
+            </tr>
+          @end
+        </tbody>
+      </table>
+    @else
+      <p>Nenhum vídeo cadastrado.</p>
+    @end
+
+    @if(videos.hasPages)
+      <nav aria-label="Paginação">
+        @if(videos.currentPage > 1)
+          @link({ href: videos.getPreviousPageUrl() })
+            Anterior
+          @end
+        @end
+        <span>Página {{ videos.currentPage }} de {{ videos.lastPage }}</span>
+        @if(videos.hasMorePages)
+          @link({ href: videos.getNextPageUrl() })
+            Próxima
+          @end
+        @end
+      </nav>
+    @end
+  @end
+@end
