@@ -47,10 +47,15 @@ export default class VideosController {
   }
 
   /**
-   * Provisório: só para o redirecionamento ter destino. A página completa é a T08.
+   * Detalhe do vídeo (T08): player embed + metadados. Inexistente -> 404.
    */
   async show({ params, view }: HttpContext) {
-    const video = await Video.query().where('id', params.id).preload('canal').firstOrFail()
+    const video = await Video.query()
+      .where('id', params.id)
+      .preload('canal')
+      .preload('publicador')
+      .preload('tags', (q) => q.orderBy('nome'))
+      .firstOrFail()
     return view.render('pages/videos/show', { video })
   }
 }
